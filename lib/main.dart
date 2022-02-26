@@ -2,16 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/home_page.dart';
 import 'pages/signin_page.dart';
 import 'pages/signup_page.dart';
 import 'pages/splash_page.dart';
-import 'providers/auth/auth_provider.dart';
-import 'providers/profile/profile_provider.dart';
-import 'providers/signin/signin_provider.dart';
-import 'providers/signup/signup_provider.dart';
+import 'providers/providers.dart';
 import 'repositories/auth_repository.dart';
 import 'repositories/profile_repository.dart';
 
@@ -42,31 +40,17 @@ class MyApp extends StatelessWidget {
           create: (context) => context.read<AuthRepository>().user,
           initialData: null,
         ),
-        ChangeNotifierProxyProvider<fb_auth.User?, AuthProvider>(
-          create: (context) => AuthProvider(
-            authRepository: context.read<AuthRepository>(),
-          ),
-          update: (
-            BuildContext context,
-            fb_auth.User? userStream,
-            AuthProvider? authProvider,
-          ) =>
-              authProvider!..update(userStream),
+        StateNotifierProvider<AuthProvider, AuthState>(
+          create: (context) => AuthProvider(),
         ),
-        ChangeNotifierProvider<SigninProvider>(
-          create: (context) => SigninProvider(
-            authRepository: context.read<AuthRepository>(),
-          ),
+        StateNotifierProvider<SigninProvider, SigninState>(
+          create: (context) => SigninProvider(),
         ),
-        ChangeNotifierProvider<SignupProvider>(
-          create: (context) => SignupProvider(
-            authRepository: context.read<AuthRepository>(),
-          ),
+        StateNotifierProvider<SignupProvider, SignupState>(
+          create: (context) => SignupProvider(),
         ),
-        ChangeNotifierProvider<ProfileProvider>(
-          create: (context) => ProfileProvider(
-            profileRepository: context.read<ProfileRepository>(),
-          ),
+        StateNotifierProvider<ProfileProvider, ProfileState>(
+          create: (context) => ProfileProvider(),
         ),
       ],
       child: MaterialApp(

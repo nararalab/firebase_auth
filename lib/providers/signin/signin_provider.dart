@@ -1,32 +1,23 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_firebase_auth/repositories/auth_repository.dart';
+import 'package:state_notifier/state_notifier.dart';
 
 import '../../models/custom_error.dart';
-import '../../repositories/auth_repository.dart';
 import 'signin_state.dart';
 
-class SigninProvider with ChangeNotifier {
-  SigninState _state = SigninState.initial();
-  SigninState get state => _state;
-
-  final AuthRepository authRepository;
-  SigninProvider({
-    required this.authRepository,
-  });
+class SigninProvider extends StateNotifier<SigninState> with LocatorMixin {
+  SigninProvider() : super(SigninState.initial());
 
   Future<void> signin({
     required String email,
     required String password,
   }) async {
-    _state = _state.copyWith(signinStatus: SigninStatus.submitting);
-    notifyListeners();
-
+    state = state.copyWith(signinStatus: SigninStatus.submitting);
     try {
-      await authRepository.signin(email: email, password: password);
-      _state = _state.copyWith(signinStatus: SigninStatus.success);
-      notifyListeners();
+      await read<AuthRepository>().signin(email: email, password: password);
+      state = state.copyWith(signinStatus: SigninStatus.success);
     } on CustomError catch (e) {
-      _state = _state.copyWith(signinStatus: SigninStatus.error, error: e);
-      notifyListeners();
+      state = state.copyWith(signinStatus: SigninStatus.error, error: e);
       rethrow;
     }
   }
