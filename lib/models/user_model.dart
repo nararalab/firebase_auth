@@ -22,11 +22,11 @@ class User extends Equatable {
 
     return User(
       id: userDoc.id,
-      name: userDoc['name'],
-      email: userDoc['email'],
-      profileImage: userDoc['profileImage'],
-      point: userDoc['point'],
-      rank: userDoc['rank'],
+      name: userData!['name'],
+      email: userData['email'],
+      profileImage: userData['profileImage'],
+      point: userData['point'],
+      rank: userData['rank'],
     );
   }
 

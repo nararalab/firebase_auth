@@ -75,11 +75,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SplashPage(),
+        home: const SplashPage(),
         routes: {
-          SignupPage.routeName: (context) => SignupPage(),
-          SigninPage.routeName: (context) => SigninPage(),
-          HomePage.routeName: (context) => HomePage(),
+          SignupPage.routeName: (context) => const SignupPage(),
+          SigninPage.routeName: (context) => const SigninPage(),
+          HomePage.routeName: (context) => const HomePage(),
         },
       ),
     );

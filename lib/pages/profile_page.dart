@@ -66,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(width: 20.0),
             const Text(
-              'Ooops!\nTry again',
+              '에러!\n프로필 상태를 가져오지 못했습니다. 다시시도하세요',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20.0,

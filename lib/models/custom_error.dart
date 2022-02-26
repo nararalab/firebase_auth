@@ -4,7 +4,7 @@ class CustomError extends Equatable {
   final String code;
   final String message;
   final String plugin;
-  CustomError({
+  const CustomError({
     this.code = '',
     this.message = '',
     this.plugin = '',

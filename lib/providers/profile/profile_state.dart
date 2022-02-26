@@ -24,7 +24,7 @@ class ProfileState extends Equatable {
     return ProfileState(
       profileStatus: ProfileStatus.initial,
       user: User.initialUser(),
-      error: CustomError(),
+      error: const CustomError(),
     );
   }
 
