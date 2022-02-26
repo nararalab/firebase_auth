@@ -14,6 +14,8 @@ flutter pub add firebase_auth
 flutter pub add firebase_core
 flutter pub add provider
 flutter pub add validators
+flutter pub add flutter_state_notifier
+flutter pub add state_notifier
 ```
 
 ## 파이어베이스설정
